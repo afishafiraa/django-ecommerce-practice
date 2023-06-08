@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'carousel.html' %}
+
+{% if query %}
+
+<!--Main layout-->
+<main>
+    <div class="container">
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-lg navbar-dark mt-3 mb-5 shadow p-2" style="background-color: #ec8389">
+            <!-- Container wrapper -->
+            <div class="container-fluid">
+
+                <!-- Navbar brand -->
+                <a class="navbar-brand" >Categories:</a>
+
+                <!-- Toggle button -->
+                <button
+                        class="navbar-toggler"
+                        type="button"
+                        data-mdb-toggle="collapse"
+                        data-mdb-target="#navbarSupportedContent2"
+                        aria-controls="navbarSupportedContent2"
+                        aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+
+                <!-- Collapsible wrapper -->
+                <div class="collapse navbar-collapse" id="navbarSupportedContent2">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+                        <!-- Link -->
+                        <li class="nav-item acitve">
+                            <a class="nav-link text-white" href="{% url 'toko:home-produk-list' %}">All</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white" href="{% url 'toko:home-produk-skincare-list' %}">Skincare</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-white" href="{% url 'toko:home-produk-bathbody-list' %}">Bath and Body</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link text-white" href="{% url 'toko:home-produk-others-list' %}">Other</a>
+                        </li>
+
+                    </ul>
+
+                    <!-- Search -->
+                    <form class="d-flex input-group w-auto" role="search" method="POST" action="{% url 'toko:search-view' %}">
+                      {% csrf_token %}
+                      <input type="search" class="form-control rounded" placeholder="Search" name="search_query" aria-label="Search" autocomplete="off"/>
+                      <span class="input-group-text text-white border-0" id="search-addon">
+                      <i class="fas fa-search"></i>
+                      </span>
+                    </form>
+
+                </div>
+            </div>
+            <!-- Container wrapper -->
+        </nav>
+        <!-- Navbar -->
+        
+<section>
+            <div class="text-center">
+              <div class="row">
+        {% if posts %}
+        {% for post in posts %}
+        <div class="col-lg-3 col-md-6 mb-4">
+                  <div class="card">
+                    <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
+                      data-mdb-ripple-color="light">
+                      <img src="{{ post.gambar.url }}"
+                        class="w-100" />
+                      <a href="{{ post.get_absolute_url }}"> 
+                        <div class="mask">
+                          <div class="d-flex justify-content-start align-items-end h-100">
+                            <h5><span class="badge bg-{{ post.get_label_display }} ms-2">{{ post.label }}</span></h5>
+                          </div>
+                        </div>
+                        <div class="hover-overlay">
+                          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                        </div>
+                      </a>
+                    </div>
+                    <div class="card-body">
+                      <a href="{{ post.get_absolute_url }}" class="text-reset">
+                        <h5 class="card-title mb-2">{{ post.nama_produk }}</h5>
+                      </a>
+                      <a href="" class="text-reset ">
+                        <p>{{ post.get_kategori_display }}</p>
+                      </a>
+                      <h6 class="mb-3 price">${% if post.harga_diskon %}{{ post.harga_diskon }}{% else %}{{ post.harga }}{% endif %}</h6>
+                    </div>
+                  </div>
+                </div>
+        {% endfor %}
+{% else %}
+<p><center>No search results found</center></p>
+{% endif %}
+{% else %}
+<p><center>Please enter a search query</center></p>
+{% endif %}
+</div>
+</div>
+</section>
+</main>
+{% endblock content %}
