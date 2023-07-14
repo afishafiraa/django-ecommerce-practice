@@ -7,22 +7,22 @@ from django.utils import timezone
 from django.views import generic
 from paypal.standard.forms import PayPalPaymentsForm
 
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404, redirect
 
 
 from django.shortcuts import render, redirect
 from django.core.mail import EmailMessage
 from .forms import ContactForm
 from django.conf import settings
+from django.http import HttpResponseRedirect
 
 from .forms import CheckoutForm
-from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment
+from .models import ProdukItem, OrderProdukItem, Order, AlamatPengiriman, Payment, Review   
 import django_filters
 
 class HomeListView(generic.ListView):
     template_name = 'home.html'
     queryset = ProdukItem.objects.all()
-    paginate_by = 4
 
 class HomeListBathBody(generic.ListView):
     template_name = 'bathbody.html'
@@ -59,6 +59,32 @@ def search_feature(request):
 class ProductDetailView(generic.DetailView):
     template_name = 'product_detail.html'
     queryset = ProdukItem.objects.all()
+
+def product(request, slug):
+    product = get_object_or_404(ProdukItem, slug=slug)
+
+    if request.method == 'POST':
+        rating = request.POST.get('rating', 3)
+        content = request.POST.get('content', '')
+
+        if content:
+            reviews = Review.objects.filter(created_by=request.user, product=product)
+
+            if reviews.count() > 0:
+                review = reviews.first()
+                review.rating = rating
+                review.content = content
+                review.save()
+            else:
+                review = Review.objects.create(
+                    product=product,
+                    rating=rating,
+                    content=content,
+                    created_by=request.user
+                )
+            return redirect('product_detail.html', slug=slug)
+
+    return render(request, 'product_detail.html', {'product': product})
 
 class CheckoutView(LoginRequiredMixin, generic.FormView):
     def get(self, *args, **kwargs):

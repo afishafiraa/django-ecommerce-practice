@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('deskripsi', models.TextField()),
                 ('gambar', models.ImageField(upload_to='product_pics')),
                 ('label', models.CharField(choices=[('NEW', 'primary'), ('SALE', 'secondary'), ('BEST', 'danger')], max_length=4)),
-                ('kategori', models.CharField(choices=[('S', 'Shirt'), ('SW', 'Sport wear'), ('OW', 'Outwear')], max_length=2)),
+                ('kategori', models.CharField(choices=[('S', 'Skincare'), ('BB', 'Bath and Body'), ('OW', 'Others')], max_length=2)),
             ],
         ),
     ]

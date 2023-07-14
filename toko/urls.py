@@ -1,4 +1,4 @@
-from django.urls import path
+from django.urls import path, include, URLPattern
 from . import views
 
 app_name = 'toko'
@@ -19,4 +19,6 @@ urlpatterns = [
      path('paypal-cancel/', views.paypal_cancel, name='paypal-cancel'),
      path('contact/', views.contact, name='contact'),
      path('success/', views.success, name='success'),
+     path('product/', views.product, name='product'),
+     path('currencies/', include('currencies.urls')),
 ]

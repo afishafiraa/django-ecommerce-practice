@@ -23,7 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('paypal/', include('paypal.standard.ipn.urls')),
-    path('', include('toko.urls', namespace='toko')),
+    path('', include('toko.urls', namespace='toko')),    
 ]
 
 if settings.DEBUG:

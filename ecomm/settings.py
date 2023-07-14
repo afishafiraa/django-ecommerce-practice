@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
 
     'paypal.standard.ipn',
+    'currencies',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -91,6 +92,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'currencies.context_processors.currencies',
             ],
         },
     },
@@ -112,7 +114,7 @@ WSGI_APPLICATION = 'ecomm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'anton_db',
+        'NAME': 'ecom_db',
         'USER': 'postgres',
         'PASSWORD': 'shafira88',
         'HOST': 'localhost',
@@ -182,6 +184,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 SITE_ID = 1
+DEFAULT_CURRENCY = 'IDR'
 
 # enable this if you publish publicly, update the domain name
 # CSRF_TRUSTED_ORIGINS = ['https://*.my.digiers.sdm.dev.sdmdigital.id']

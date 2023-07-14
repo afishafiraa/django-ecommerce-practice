@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -49,6 +50,17 @@ class ProdukItem(models.Model):
         return reverse("toko:remove-from-cart", kwargs={
             "slug": self.slug
             })
+    
+    def get_rating(self):
+        reviews_total = 0
+
+        for review in self.reviews.all():
+            reviews_total += review.rating
+        
+        if reviews_total > 0:
+            return reviews_total / self.reviews.count()
+        
+        return 0
     
 class OrderProdukItem(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -133,3 +145,10 @@ class Payment(models.Model):
     class Meta:
         verbose_name_plural = 'Payment'
 
+
+class Review(models.Model):
+    product = models.ForeignKey(ProdukItem, related_name='reviews', on_delete=models.CASCADE)
+    rating = models.IntegerField(default=3)
+    content = models.TextField()
+    created_by = models.ForeignKey(User, related_name='reviews', on_delete=models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True)
