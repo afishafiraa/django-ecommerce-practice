@@ -54,7 +54,7 @@
                       <span class="input-group-text text-white border-0" id="search-addon">
                         <i class="fas fa-search"></i>
                       </span>
-                     </form>
+                    </form>
 
                 </div>
             </div>
@@ -68,8 +68,8 @@
             <div class="text-center">
               <div class="row">
                 {% for pItem in object_list %}
-                <div class="col-lg-3 col-md-6 mb-4">
-                  <div class="card">
+                <div class="col-lg-3 col-md-6 mb-4 d-flex align-items-stretch">
+                  <div class="card ">
                     <div class="bg-image hover-zoom ripple ripple-surface ripple-surface-light"
                       data-mdb-ripple-color="light">
                       <img src="{{ pItem.gambar.url }}"
@@ -94,7 +94,7 @@
                       <a href="" class="text-reset ">
                         <p>{{ pItem.get_kategori_display }}</p>
                       </a>
-                      <h6 class="mb-3 price">${% if pItem.harga_diskon %}{{ pItem.harga_diskon|currency:"IDR" }}{% else %}{{ pItem.harga }}{% endif %}</h6>
+                      <h6 class="mb-3 price">Rp {% if pItem.harga_diskon %}{{ pItem.harga_diskon|currency:"IDR" }}{% else %}{{ pItem.harga }}{% endif %}</h6>
                     </div>
                   </div>
                 </div>

@@ -63,91 +63,91 @@
                 <!--Content-->
             </div>
             <!--Grid column-->
-        </div>
-        <!--Grid row-->
-        <hr />
+        
+            <!--Grid row-->
+            <hr />
 
-        <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="card">
-                <img class="card-img-top" src="holder.js/100x180/" alt="">
-                <div class="card-body">
-                    <h4 class="card-title">Review</h4>
-                    {% if request.user.is_authenticated %}
-                    <form method="post" action="{% url 'toko:product' %}" class="">
-                        {% csrf_token %}
-                        <div class="mb-2">
-                            <label>Rating</label><br>
-                            <select name="rating">
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3" selected>3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                                <option value="6">6</option>
-                            </select>
-                        </div>
+            <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="card">
+                    <img class="card-img-top" src="holder.js/100x180/" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title">Review</h4>
+                        {% if request.user.is_authenticated %}
+                        <form method="post" action="{% url 'toko:product' %}" class="">
+                            {% csrf_token %}
+                            <div class="mb-2">
+                                <label>Rating</label><br>
+                                <select name="rating">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3" selected>3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                </select>
+                            </div>
 
-                        <div class="mb-2">
-                            <label>Comment</label><br>
-                            <textarea name="content" class=""></textarea>
-                        </div>
+                            <div class="mb-2">
+                                <label>Comment</label><br>
+                                <textarea name="content" class=""></textarea>
+                            </div>
 
-                        <div>
-                            <button class="btn btn-info">Submit</button>
-                        </div>
-                    </form>
-                    {% endif %}
+                            <div>
+                                <button class="btn btn-info">Submit</button>
+                            </div>
+                        </form>
+                        {% endif %}
+                    </div>
                 </div>
-            </div>
-            <!--Grid column-->
+                <!--Grid column-->
 
-            {% for review in product.reviews.all %}
-            <div class="px-4 py-6 bg-gray-100 rounded-xl mb-4">
-                <strong>Rating:</strong> {{ review.rating }}/6<br>
-                <strong>Date:</strong> {{ review.created_at|date:"Y-m-d" }}<br>
-                <strong>Comment:</strong><br>
-                {{ review.content }}
+                {% for review in product.reviews.all %}
+                <div class="">
+                    <strong>Rating:</strong> {{ review.rating }}/6<br>
+                    <strong>Date:</strong> {{ review.created_at|date:"Y-m-d" }}<br>
+                    <strong>Comment:</strong><br>
+                    {{ review.content }}
+                </div>
+                {% endfor %}
             </div>
-             {% endfor %}
-        </div>
         
         
-        <!--Grid row-->
-        <div class="row d-flex justify-content-center">
-            <!--Grid column-->
-            <div class="col-md-0 text-align-left">
-                <h4 class="my-4 h5"><b>People Also Buy</b></h4>
+            <!--Grid row-->
+            <div class="row d-flex justify-content-center">
+                <!--Grid column-->
+                <div class="col-md-0 text-align-left">
+                    <h4 class="my-4 h5"><b>People Also Buy</b></h4>
+                </div>
+                <!--Grid column-->
             </div>
-            <!--Grid column-->
+            <!--Grid row-->
+
+            <!--Grid row-->
+            <div class="row text-center">
+                <!--Grid column-->
+                <div class="col-lg-4 col-md mb-3">
+                    <a href="http://127.0.0.1:8000/product/cetaphil_bodyl/"><img src="{% static 'img/cetaphillotion.png' %}" alt="cetaphillotion" class="w-50"/></a>
+                    <br><font size="2"><b>CETAPHIL Ultra Gentle Body Wash</b></font>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="http://127.0.0.1:8000/product/cetaphil_sunscreen/"><img src="{% static 'img/cetaphilsunscreen.png' %}" alt="cetaphilsunscreen" class="w-50"/></a>
+                    <br><font size="2"><b>CETAPHIL UVA/UVB Defense SPF50</b></font>
+                </div>
+                <!--Grid column-->
+
+                <!--Grid column-->
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <a href="http://127.0.0.1:8000/product/cetaphil_reveal/"><img src="{% static 'img/cetaphilultra.jpg' %}" alt="cetaphillotion" class="w-50"/></a>
+                    <br><font size="2"><b>CETAPHIL Brightening Body Lotion</b></font>
+                </div>
+                <!--Grid column-->
+            </div>
+            <!--Grid row-->
         </div>
-        <!--Grid row-->
-
-        <!--Grid row-->
-        <div class="row text-center">
-            <!--Grid column-->
-            <div class="col-lg-4 col-md mb-3">
-                <a href="http://127.0.0.1:8000/product/cetaphil_bodyl/"><img src="{% static 'img/cetaphilultra.jpg' %}" alt="cetaphillotion" class="w-50"/></a>
-                <br><font size="2"><b>CETAPHIL Ultra Gentle Bosy Wash</b></font>
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <a href="http://127.0.0.1:8000/product/sunscreen/"><img src="{% static 'img/cetaphilsunscreen.png' %}" alt="cetaphilsunscreen" class="w-50"/></a>
-                <br><font size="2"><b>CETAPHIL UVA/UVB Defense SPF50</b></font>
-            </div>
-            <!--Grid column-->
-
-            <!--Grid column-->
-            <div class="col-lg-4 col-md-6 mb-4">
-                <a href="http://127.0.0.1:8000/product/cetaphil_reveal/"><img src="{% static 'img/cetaphillotion.png' %}" alt="cetaphillotion" class="w-50"/></a>
-                <br><font size="2"><b>CETAPHIL Brightening Body Lotion</b></font>
-            </div>
-            <!--Grid column-->
-
-        </div>
-        <!--Grid row-->
     </div>
 </main>
 <!--Main layout-->

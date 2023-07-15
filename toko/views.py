@@ -23,6 +23,8 @@ import django_filters
 class HomeListView(generic.ListView):
     template_name = 'home.html'
     queryset = ProdukItem.objects.all()
+    paginate_by = 12
+
 
 class HomeListBathBody(generic.ListView):
     template_name = 'bathbody.html'

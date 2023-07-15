@@ -22,7 +22,7 @@
         <!-- Collapsible wrapper -->
         <div class="collapse navbar-collapse" id="navbarSupportedContent1">      
         <!-- Navbar brand -->
-        <a class="navbar-brand mt-2 mt-sm-0" href="#">
+        <a class="navbar-brand mt-2 mt-sm-0" href="{% url 'toko:home-produk-list' %}">
             <img
             src="{% static 'img/logo.png' %}"
             height="60"
@@ -59,7 +59,7 @@
                 </a>
             {% else %}
                 <a class="nav-link me-3" href="{% url 'account_login' %}">
-                <i class="fas fa-right-to-bracket"></i>
+                <i class="fas fa-user"></i>
             {% endif %}
         </div> 
         <!-- Right elements -->
